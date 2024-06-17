@@ -1,37 +1,64 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Image, StyleSheet, Platform } from 'react-native';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { HelloWave } from '@/components/HelloWave';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
+import { NavigationContainer } from '@react-navigation/native';
+// import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { Stack } from 'expo-router';
+import Screen1 from "@/screens/Screen1"
+import Screen2 from "@/screens/Screen2"
+import Screen3 from "@/screens/Screen3"
+import { useState } from 'react';
+import { useFonts } from 'expo-font';
+const Stack = createNativeStackNavigator();
+export default function HomeScreen() {
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const [hideSplashScreen, setHideSplashScreen] = useState(true);
 
+  const [fontsLoaded, error] = useFonts({
+    "Poppins-Medium": require("@/assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-SemiBold": require("@/assets/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Bold": require("@/assets/fonts/Poppins-Bold.ttf"),
+    "Montserrat-Regular": require("@/assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrat-SemiBold": require("@/assets/fonts/Montserrat-SemiBold.ttf"),
+  });
+
+  if (!fontsLoaded && !error) {
+    return null;
+  }
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <>
+     <>
+      {hideSplashScreen ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Screen3" component={Screen3} />
+          <Stack.Screen name="Screen1" component={Screen1} />
+          <Stack.Screen name="Screen2" component={Screen2} />
+        </Stack.Navigator>
+      ) : null}
+    </>
+  </>
   );
 }
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  stepContainer: {
+    gap: 8,
+    marginBottom: 8,
+  },
+  reactLogo: {
+    height: 178,
+    width: 290,
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+  },
+});
