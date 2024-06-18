@@ -1,53 +1,47 @@
 import * as React from "react";
 import { useState } from "react";
-import { Image } from "expo-image";
-import {
-  StyleSheet,
-  Text,
- 
-  Pressable,
-  TouchableHighlight,
-} from "react-native";
+// import { Image } from "expo-image";
+import { StyleSheet, Text, Pressable, TouchableHighlight } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
-import { View, Button } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import Modal from 'react-native-modal';
+
+import Test from "@/components/Cameratest";
+
+import { View, Button, Image } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { Menu, Provider } from "react-native-paper";
 
 const Screen2 = () => {
   const navigation = useNavigation();
-   const [isModalVisible, setModalVisible] = useState(false);
-  const [imageUri, setImageUri] = useState(null);
+  
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+  const [visible, setVisible] = useState(false);
+  const [image, setImage] = useState(null);
 
-  const handleCamera = () => {
-    launchCamera({}, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        setImageUri(response.uri);
-      }
-    });
-    toggleModal();
-  };
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
-  const handleImageLibrary = () => {
-    launchImageLibrary({}, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        setImageUri(response.uri);
-      }
-    });
-    toggleModal();
+  const pickImage = async (source) => {
+    let result;
+    if (source === "camera") {
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+      });
+    } else {
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+      });
+    }
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+    closeMenu();
   };
 
   return (
@@ -56,24 +50,38 @@ const Screen2 = () => {
       locations={[0, 0.99]}
       colors={["#2a2d32", "#131313"]}
     >
-      <View style={styles.container}>
-      <Button title="Open Menu" onPress={toggleModal} />
-      {/* <Image
-        style={[styles.screen2Child, styles.iconLayout1]}
-        contentFit="cover"
-        source={require("../assets/images/ellipse-821.png")}
-        onPress={toggleModal}
-      /> */}
-      <Modal isVisible={isModalVisible}>
-        <View style={styles.modalContent}>
-          <Button title="Take Photo" onPress={handleCamera} />
-          <Button title="Choose from Library" onPress={handleImageLibrary} />
-          <Button title="Cancel" onPress={toggleModal} />
+      <Provider>
+        <View
+          style={[styles.menubutton] }
+        >
+          <Button onPress={openMenu} title="Open Menu" />
+
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<Button onPress={openMenu} title="Choose an option" />}
+          >
+            <Menu.Item
+              onPress={() => pickImage("camera")}
+              title="Take a Photo"
+            />
+            <Menu.Item
+              onPress={() => pickImage("library")}
+              title="Upload from Device"
+            />
+          </Menu>
+
+          {image   && (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200,marginTop:20 }}
+            />
+          )}
+          {console.log("hello")}
         </View>
-      </Modal>
-      {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
-    </View>
-      
+      </Provider>
+
+     
       <View style={[styles.modeSetting, styles.analyzeFlexBox]}>
         <Text
           style={[styles.additionalInformationAbout, styles.typeHereFlexBox]}
@@ -100,7 +108,6 @@ const Screen2 = () => {
         onPress={() => navigation.navigate("Screen1")}
       >
         <>
-          
           <Image
             style={[styles.buttonShellIcon, styles.buttonsbutton2Layout]}
             contentFit="cover"
@@ -138,18 +145,29 @@ const Screen2 = () => {
 };
 
 const styles = StyleSheet.create({
+menubutton:{
+  flex: 1, justifyContent: "center", alignItems: "center",
+  top: 198,
+  right: 96,
+  bottom: 438,
+  left: 96,
+  borderRadius: 933,
+  maxHeight: "100%",
+  position: "absolute",
+},
+
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: "rgba(0, 0, 0, 0.1)",
   },
   image: {
     width: 300,
@@ -260,7 +278,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     position: "absolute",
   },
- 
+
   buttonShellIcon: {
     top: 0,
     right: 0,
