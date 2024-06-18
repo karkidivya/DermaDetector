@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 // import { Image } from "expo-image";
 import { StyleSheet, Text, Pressable, TouchableHighlight } from "react-native";
+import { SafeAreaView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
@@ -14,10 +15,10 @@ import { Menu, Provider } from "react-native-paper";
 
 const Screen2 = () => {
   const navigation = useNavigation();
-  
 
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState(null);
+  const [text, onChangeText] = useState("");
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -50,17 +51,39 @@ const Screen2 = () => {
       locations={[0, 0.99]}
       colors={["#2a2d32", "#131313"]}
     >
+      <View>
+        <Text style={[styles.getYourSkin, styles.typeHereFlexBox]}>
+          Get your skin checked
+        </Text>
+      </View>
+
       <Provider>
-        <View
-          style={[styles.menubutton] }
-        >
-          <Button onPress={openMenu} title="Open Menu" />
+        <View style={[styles.menubutton]}>
+        <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<Pressable onPress={openMenu}>
+              <Image
+                style={styles.iconLayout1}
+                resizeMode="cover"
+                source={require('../assets/images/ellipse-821.png')}
+              />
+            </Pressable>}
+          >
+          {/* <Button onPress={openMenu} title="Open Menu" ><Image
+        style={[styles.screen2Child, styles.iconLayout1]}
+        contentFit="cover"
+        source={require("../assets/images/ellipse-821.png")}
+        onPress={openMenu} title="Open Menu"
+      /></Button>
 
           <Menu
             visible={visible}
             onDismiss={closeMenu}
             anchor={<Button onPress={openMenu} title="Choose an option" />}
-          >
+          > */}
+            
+
             <Menu.Item
               onPress={() => pickImage("camera")}
               title="Take a Photo"
@@ -71,24 +94,34 @@ const Screen2 = () => {
             />
           </Menu>
 
-          {image   && (
+          {image && (
             <Image
               source={{ uri: image }}
-              style={{ width: 200, height: 200,marginTop:20 }}
+              style={{ width: 200, height: 200, marginTop: 20 }}
             />
           )}
           {console.log("hello")}
         </View>
       </Provider>
 
-     
       <View style={[styles.modeSetting, styles.analyzeFlexBox]}>
         <Text
           style={[styles.additionalInformationAbout, styles.typeHereFlexBox]}
         >
           Additional information about your condition
         </Text>
-        <View style={styles.modeSettingChild} />
+
+        <SafeAreaView>
+          <TextInput
+            style={styles.input}
+            multiline
+            numberOfLines={4}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Type here.."
+            // keyboardType="numeric"
+          />
+        </SafeAreaView>
         <View style={[styles.top, styles.topFlexBox]}>
           <Image
             style={styles.ventIcon}
@@ -97,64 +130,43 @@ const Screen2 = () => {
           />
         </View>
       </View>
-      <Text style={[styles.getYourSkin, styles.typeHereFlexBox]}>
-        Get your skin checked
-      </Text>
-      <Text style={[styles.typeHere, styles.typeHereFlexBox]}>Type here..</Text>
-      <TouchableHighlight
-        style={[styles.buttonsbutton2, styles.buttonsbutton2Layout]}
-        underlayColor="#fff"
-        activeOpacity={0.2}
-        onPress={() => navigation.navigate("Screen1")}
-      >
-        <>
-          <Image
-            style={[styles.buttonShellIcon, styles.buttonsbutton2Layout]}
-            contentFit="cover"
-            source={require("../assets/images/button-shell.png")}
-          />
-          <View style={styles.buttonContent}>
-            <Image
-              style={styles.iconLayout}
-              contentFit="cover"
-              source={require("../assets/images/start-icon.png")}
-            />
-            <View style={styles.labelWrapper}>
-              <View style={[styles.label, styles.topFlexBox]}>
-                <Image
-                  style={styles.labelChild}
-                  contentFit="cover"
-                  source={require("../assets/images/group-1.png")}
-                />
-              </View>
-            </View>
-          </View>
-          <Image
-            style={[styles.endIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/images/end-icon.png")}
-          />
-        </>
-      </TouchableHighlight>
-      <View style={styles.homeindicator}>
-        <View style={styles.homeIndicator} />
+
+      <View style={[styles.analyzebutton]}>
+        <Button
+          title="Analyze"
+           color="#d9d9d9"
+          onPress={() => navigation.navigate("Screen1")}
+        />
       </View>
-      <Text style={[styles.analyze, styles.analyzeFlexBox]}>Analyze</Text>
+
+    
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-menubutton:{
-  flex: 1, justifyContent: "center", alignItems: "center",
-  top: 198,
-  right: 96,
-  bottom: 438,
-  left: 96,
-  borderRadius: 933,
-  maxHeight: "100%",
-  position: "absolute",
-},
+  analyzebutton: {
+    marginBottom: 10,
+    marginTop:5,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    width: 300,
+    height: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 15,
+    textAlignVertical: "top",
+  },
+  menubutton: {
+    flexDirection: "row", // Ensure items are laid out horizontally
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20, // Adjust this margin as needed
+  },
 
   container: {
     flex: 1,
@@ -180,13 +192,13 @@ menubutton:{
     borderRadius: Border.br_21xl,
   },
   iconLayout1: {
-    maxWidth: "100%",
-    overflow: "hidden",
+    width: 110, // Adjust the width and height of the ellipse image
+    height: 110, // to fit your design requirements
+    marginLeft: 10, // Adjust margins as needed
   },
   analyzeFlexBox: {
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
   },
   typeHereFlexBox: {
     textAlign: "left",
@@ -196,33 +208,33 @@ menubutton:{
     flexDirection: "row",
     alignItems: "center",
   },
-  buttonsbutton2Layout: {
-    height: 53,
-    position: "absolute",
-  },
+  // buttonsbutton2Layout: {
+  //   height: 53,
+  //   position: "absolute",
+  // },
   iconLayout: {
     height: 24,
     width: 24,
     display: "none",
   },
   screen2Child: {
-    top: 198,
-    right: 96,
-    bottom: 438,
-    left: 96,
+    // top: 198,
+    // right: 96,
+    // bottom: 438,
+    // left: 96,
     borderRadius: 933,
     maxHeight: "100%",
-    position: "absolute",
+    // position: "absolute",
   },
   additionalInformationAbout: {
-    width: 285,
-    height: 18,
+    // width: 385,
+    // height: 18,
     color: Color.labelColorDarkPrimary,
-    fontFamily: FontFamily.montserratRegular,
-    lineHeight: 18,
-    fontSize: FontSize.size_smi,
-    textAlign: "left",
-    letterSpacing: 0,
+    // fontFamily: FontFamily.montserratRegular,
+    // lineHeight: 18,
+    // fontSize: FontSize.size_smi,
+    // textAlign: "left",
+    // letterSpacing: 0,
   },
   modeSettingChild: {
     borderRadius: 8,
@@ -242,9 +254,9 @@ menubutton:{
     justifyContent: "center",
   },
   modeSetting: {
-    right: -1,
-    bottom: 161,
-    left: 1,
+    // right: -1,
+    // bottom: 161,
+    // left: 1,
     backgroundColor: "rgba(255, 255, 255, 0.44)",
     borderColor: Color.labelColorDarkPrimary,
     borderWidth: 1,
@@ -255,29 +267,31 @@ menubutton:{
     borderRadius: Border.br_21xl,
   },
   getYourSkin: {
-    top: 97,
+    // top: 97,
+    marginTop: 57,
+    marginLeft: 19,
     fontSize: FontSize.size_9xl,
     fontWeight: "700",
     fontFamily: FontFamily.poppinsBold,
-    left: 19,
+    // left: 19,
     color: Color.labelColorDarkPrimary,
     textAlign: "left",
     letterSpacing: 0,
-    position: "absolute",
+    // position: "absolute",
   },
-  typeHere: {
-    top: 535,
-    left: 54,
-    color: "#000",
-    width: 290,
-    opacity: 0.6,
-    fontFamily: FontFamily.montserratRegular,
-    lineHeight: 18,
-    fontSize: FontSize.size_smi,
-    textAlign: "left",
-    letterSpacing: 0,
-    position: "absolute",
-  },
+  // typeHere: {
+  //   top: 535,
+  //   left: 54,
+  //   color: "#000",
+  //   width: 290,
+  //   opacity: 0.6,
+  //   fontFamily: FontFamily.montserratRegular,
+  //   lineHeight: 18,
+  //   fontSize: FontSize.size_smi,
+  //   textAlign: "left",
+  //   letterSpacing: 0,
+  //   position: "absolute",
+  // },
 
   buttonShellIcon: {
     top: 0,
@@ -298,41 +312,35 @@ menubutton:{
   labelWrapper: {
     paddingLeft: Padding.p_7xs,
   },
-  buttonContent: {
-    top: 14,
-    left: 16,
-    display: "none",
-    flexDirection: "row",
-    position: "absolute",
-  },
-  endIcon: {
-    marginTop: -12,
-    top: "50%",
-    right: 14,
-    position: "absolute",
-  },
+
+  // endIcon: {
+  //   marginTop: -12,
+  //   top: "50%",
+  //   right: 14,
+  //   position: "absolute",
+  // },
   buttonsbutton2: {
     top: 708,
     width: 326,
     left: 19,
   },
-  homeIndicator: {
-    marginLeft: -67,
-    bottom: 8,
-    left: "50%",
-    borderRadius: Border.br_81xl,
-    backgroundColor: Color.labelColorDarkPrimary,
-    width: 134,
-    height: 5,
-    position: "absolute",
-  },
-  homeindicator: {
-    right: 27,
-    bottom: 40,
-    left: 33,
-    height: 34,
-    position: "absolute",
-  },
+  // homeIndicator: {
+  //   marginLeft: -67,
+  //   bottom: 8,
+  //   left: "50%",
+  //   borderRadius: Border.br_81xl,
+  //   backgroundColor: Color.labelColorDarkPrimary,
+  //   width: 134,
+  //   height: 5,
+  //   position: "absolute",
+  // },
+  // homeindicator: {
+  //   right: 27,
+  //   bottom: 40,
+  //   left: 33,
+  //   height: 34,
+  //   position: "absolute",
+  // },
   analyze: {
     top: 719,
     left: 108,
