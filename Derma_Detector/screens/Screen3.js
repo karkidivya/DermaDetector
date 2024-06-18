@@ -30,11 +30,7 @@ const Screen3 = () => {
         onPress={() => navigation.navigate("Screen2")}
       >
         <>
-          <Image
-            style={[styles.outerRingIcon, styles.iconLayout1]}
-            contentFit="cover"
-            source={require("../assets/images/outer-ring.png")}
-          />
+        
           <Image
             style={[styles.buttonShellIcon, styles.iconLayout1]}
             contentFit="cover"
@@ -102,23 +98,18 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   revolutionizingSkinHealth: {
-    top: 622,
+    top: 600,
     left: 18,
     fontSize: 24,
     color: "#7187be",
     width: 325,
-    height: 50,
+    // height: 50,
     textAlign: "center",
     fontFamily: FontFamily.poppinsMedium,
     fontWeight: "500",
     position: "absolute",
   },
-  outerRingIcon: {
-    top: -5,
-    right: -5,
-    left: -5,
-    height: 63,
-  },
+ 
   buttonShellIcon: {
     top: 0,
     right: 0,
