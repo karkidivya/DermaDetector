@@ -31,6 +31,10 @@ def preprocess_text(text):
     # For example, if you need to convert text to numerical vectors
     return text  # Adjust based on your model
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'message': 'pong'})
+
 @app.route('/predict', methods=['POST'])
 def predict():
     print("hello world")
@@ -58,6 +62,8 @@ def predict():
     return jsonify({'treatment_solution': "run"})
 
 if __name__ == '__main__':
-    print("hello world")
-    app.run(debug=True)
+    print("hello world1")
+    # app.run(host='0.0.0.0', port=5000)
+    # app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
     
