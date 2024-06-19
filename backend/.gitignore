@@ -1,0 +1,21 @@
+# Ignore Flask-related files and directories
+/backend/__pycache__
+/backend/*.pyc
+/backend/*.pyo
+/backend/*.pyd
+/backend/*.pyo
+/backend/*.pyi
+/backend/*.pyw
+/backend/*.pyz
+/backend/*.pywz
+/backend/*.ipynb_checkpoints
+/backend/instance/
+/backend/logs/
+/backend/web.config
+/backend/.env
+/backend/.flaskenv
+/backend/db.sqlite3
+
+
+/model.h5
+/myenv

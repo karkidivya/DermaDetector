@@ -12,7 +12,7 @@ import Test from "@/components/Cameratest";
 import { View, Button, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Menu, Provider } from "react-native-paper";
-
+import axios from 'axios';
 const Screen2 = () => {
   const navigation = useNavigation();
 
@@ -43,6 +43,34 @@ const Screen2 = () => {
       setImage(result.assets[0].uri);
     }
     closeMenu();
+  };
+
+  const getPrediction = async () => {
+    // if (!image || !text) {
+    //   alert('Please provide both image and text description');
+    //   return;
+    // }
+
+    // Convert image to base64
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64data = reader.result.split(',')[1];
+      console.log(base64data, text)
+      // Send the image and text to the backend
+      try {
+        const res =  await axios.post('http://localhost:5000/predict', {
+          image: base64data,
+          text: text,
+        });
+        // setTreatment(res.data.treatment_solution);
+      } catch (error) {
+        console.error(error);
+        alert('Error getting treatment solution');
+      }
+    };
+    reader.readAsDataURL(blob);
   };
 
   return (
@@ -135,7 +163,8 @@ const Screen2 = () => {
         <Button
           title="Analyze"
            color="#d9d9d9"
-          onPress={() => navigation.navigate("Screen1")}
+          // onPress={() => navigation.navigate("Screen1")}
+          onPress={getPrediction}
         />
       </View>
 

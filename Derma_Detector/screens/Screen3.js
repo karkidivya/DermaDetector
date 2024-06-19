@@ -27,6 +27,7 @@ const Screen3 = () => {
         style={styles.buttonsbutton1}
         underlayColor="#fff"
         activeOpacity={0.2}
+        // onPress={() => navigation.navigate("/Modeltester")}
         onPress={() => navigation.navigate("Screen2")}
       >
         <>
