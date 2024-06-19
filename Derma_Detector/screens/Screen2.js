@@ -47,7 +47,7 @@ const Screen2 = () => {
   useEffect(()=>{
     const testConnection = async () => {
       try {
-        const res = await axios.get('http://192.168.1.78:5000/ping');  // replace with your computer's IP address
+        const res = await axios.get('http://192.168.1.75:5000/ping');  // replace with your computer's IP address
         console.log(res.data);
       } catch (error) {
         console.error('Error connecting to the server', error);
@@ -72,7 +72,7 @@ const Screen2 = () => {
       console.log(base64data, text)
       // Send the image and text to the backend
       try {
-        const res =  await axios.post('http://192.168.1.78:5000/predict', {
+        const res =  await axios.post('http://192.168.1.75:5000/predict', {
           image: base64data,
           text: text,
         });

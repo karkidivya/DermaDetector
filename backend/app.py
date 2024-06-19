@@ -17,7 +17,7 @@ def custom_load_model(filepath):
     model.compile(optimizer=optimizer, loss='categorical_crossentropy')  # Set your loss here
     return model
 
-model = custom_load_model('model.h5')
+model = custom_load_model('./model.h5')
 
 def preprocess_image(image):
     image = image.resize((224, 224))  # Adjust size according to your model's requirements
@@ -37,7 +37,6 @@ def ping():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    print("hello world")
     data = request.json
     print(data)
     # # Decode the image
