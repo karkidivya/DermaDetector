@@ -1,12 +1,10 @@
-# Skin Disease Detector using EfficientNet
+# Skin Disease Detector using EfficientNet and tinyllma
 
 ## Project Summary and Motivation
-
-The aim of this project is to develop a tool that, given an image of a skin lesion(lesion is that part of skin in which the skin texture looks different than other areas/parts) , can predict the likelihood of the lesion being a specific skin disease.
-Skin diseases, including skin cancer, can have significant impacts on individuals' health, making early detection and diagnosis crucial.
-
+The aim of this project is to develop a comprehensive tool capable of predicting the likelihood of a skin lesion being a specific skin disease based on an image of the lesion. A skin lesion refers to an area of the skin that has a different texture or appearance compared to the surrounding skin. Skin diseases, ranging from benign conditions to serious ailments like skin cancer, can significantly impact an individual's health and quality of life. Early detection and accurate diagnosis are crucial for effective treatment and better health outcomes.
 ### Key Facts About Skin Diseases
-
+Skin diseases, including cancerous and non-cancerous conditions, present a wide spectrum of challenges.
+Every year, there are more new cases of skin cancer than the combined incidence of cancers of the breast, prostate, lung, and colon.
 - Skin diseases is a prevalent disease, with new cases surpassing the combined incidence of several other non-canerous and cancerous diseases.
 - Early detection of melanoma, a type of skin cancer, has a significant impact on survival rates. The estimated 5-year survival rate for early-detected melanoma is about 98%.
 
@@ -20,8 +18,7 @@ This project leverages advanced machine learning techniques, specifically Convol
 The project involves constructing a CNN model along with a LLM model to predict the likelihood that a skin lesion is one of several specified skin diseases.
 The application users can click or upload their affected skin areas photo along with the description of their problem, and the model will accurately predict the disease and provides
 us the Name of disease along with the ways to prevent and/or treatment plan for it.
-In order to make the developmental task easier, we imported a pre-trained version of the efficientnet_bo model and implemented in our Skin Disease Detection tasks and further trained(fine-tuned) 
-it on multiple epochs on around 4000+ datasets of 15 different classes of skin diseases.
+In order to make the developmental task easier, we imported a pre-trained version of the efficientnet_bo model and implemented in our Skin Disease Detection tasks and further trained(fine-tuned) it on multiple epochs on around 4000+ datasets of 15 different classes of skin diseases.
 The training, validation and testing losses are calculated along with the precision, accuracy, recall etc. and we viewed that these losses got significantly decreased after the completion of model
 fine-tuning.
 
