@@ -11,6 +11,10 @@ from tensorflow.keras.optimizers import Adam
 app = Flask(__name__)
 CORS(app)
 
+# model and toknizer file path
+model_dir = 'backend/models/text'
+tokenizer_dir = 'backend/models/tokenizer'
+
 def custom_load_model(filepath):
     model = load_model(filepath, compile=False)  # Load the model without compiling it
     optimizer = Adam(learning_rate=0.001)  # Set your learning rate here
