@@ -1,350 +1,221 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  View,
+  TouchableHighlight,
+} from "react-native";
 import { Image } from "expo-image";
-import { ProgressBar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { Padding, Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+import { FontSize, FontFamily, Padding, Border, Color } from "../GlobalStyles";
 
 const Screen1 = () => {
+  const navigation = useNavigation();
+
   return (
     <LinearGradient
-      style={styles.screen3}
+      style={styles.screen1}
       locations={[0, 0.99]}
-      colors={["#2a2d32", "#1d1d1d"]}
+      colors={["#2a2d32", "#131313"]}
     >
-      <View style={[styles.dropdownTableRow, styles.image40IconPosition]}>
-        <View style={styles.modeDescription}>
-          <View style={[styles.modeParent, styles.row3FlexBox]}>
-            <Text style={[styles.mode, styles.modeClr]}>Suggestions</Text>
-            <Text style={[styles.text, styles.modeClr]}>􀆈</Text>
-            <View style={[styles.leftArrowIcon, styles.leftIconLayout]}>
-              <Image
-                style={[styles.leftArrowIconChild, styles.batteryBasePosition]}
-                contentFit="cover"
-                source={require("../assets/images/ellipse-811.png")}
-              />
-              <Text style={[styles.text1, styles.kmTypo]}>􀌁</Text>
-              <View style={styles.listBullet}>
-                <Text style={[styles.listBullet1, styles.modeTypo]}>􀆇</Text>
+      <Text style={styles.revolutionizingSkinHealth}>
+        Revolutionizing skin health diagnostics with AI
+      </Text>
+      <TouchableHighlight
+        style={styles.buttonsbutton1}
+        underlayColor="#fff"
+        activeOpacity={0.2}
+        // onPress={() => navigation.navigate("/Modeltester")}
+        onPress={() => navigation.navigate("Screen2")}
+      >
+        <>
+        
+          <Image
+            style={[styles.buttonShellIcon, styles.iconLayout1]}
+            contentFit="cover"
+            source={require("../assets/images/button-shell.png")}
+          />
+          <View style={styles.buttonContent}>
+            <Image
+              style={styles.iconLayout}
+              contentFit="cover"
+              source={require("../assets/images/start-icon.png")}
+            />
+            <View style={styles.labelWrapper}>
+              <View style={styles.label}>
+                <Image
+                  style={styles.labelChild}
+                  contentFit="cover"
+                  source={require("../assets/images/group-1.png")}
+                />
               </View>
             </View>
           </View>
-          <View style={[styles.row3, styles.row3FlexBox]}>
-            <View style={styles.cleanseWithWarmWaterAndWiParent}>
-              <Text style={styles.cleanseWithWarm}>
-                Cleanse with warm water and wipe with soft towel
-              </Text>
-              <Text style={[styles.timesADay, styles.accuracyTypo]}>
-                2 times a day
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.percentage}>
-        <View style={styles.battery}>
-          <View style={[styles.batteryBase, styles.batteryPosition]}>
-            <ProgressBar style={styles.progressbar} progress={1} />
-          </View>
           <Image
-            style={[styles.batteryChargeIcon, styles.iconPosition]}
+            style={[styles.endIcon, styles.iconLayout]}
             contentFit="cover"
-            source={require("../assets/images/battery-charge.png")}
+            source={require("../assets/images/end-icon.png")}
           />
-          <Image
-            style={[styles.neonEffectIcon, styles.iconPosition]}
-            contentFit="cover"
-            source={require("../assets/images/neon-effect.png")}
-          />
-        </View>
-        <Text style={[styles.accuracy, styles.kmSpaceBlock]}>
-          Seriousness: 0.2%
-        </Text>
+        </>
+      </TouchableHighlight>
+      <View style={styles.homeindicator}>
+        <View style={styles.homeIndicator} />
       </View>
-      <Text style={styles.acne}>
-        <Text style={[styles.text2, styles.text2Typo]}>65</Text>
-        <Text style={[styles.acne1, styles.modeTypo]}>% Acne</Text>
-      </Text>
       <Image
-        style={[styles.image40Icon, styles.image40IconPosition]}
+        style={styles.image41Icon}
         contentFit="cover"
-        source={require("../assets/images/image-40.png")}
+        source={require("../assets/images/image-41.png")}
       />
-      <View style={styles.title}>
-        <Image
-          style={styles.leftArrowButton}
-          contentFit="cover"
-          source={require("../assets/images/left-arrow-button.png")}
-        />
-        <View style={styles.title1}>
-          <Text style={[styles.result, styles.text2Typo]}>Result</Text>
-          <Text style={[styles.km, styles.kmSpaceBlock]}>􀺸 187 km</Text>
-        </View>
-      </View>
+      <Text style={styles.dermadetector}>DermaDetector</Text>
+      <Text style={[styles.realTimeScreenCondition, styles.getStartedFlexBox]}>
+        Real-time screen condition analysis
+      </Text>
+      <Text style={[styles.getStarted, styles.getStartedFlexBox]}>
+        Get Started
+      </Text>
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  progressbar: {
-    height: 39,
-    width: 274,
+  iconLayout1: {
+    maxWidth: "100%",
+    position: "absolute",
+    overflow: "hidden",
   },
-  image40IconPosition: {
-    left: "50%",
+  iconLayout: {
+    height: 24,
+    width: 24,
+    display: "none",
+  },
+  getStartedFlexBox: {
+    justifyContent: "center",
+    display: "flex",
+    fontSize: FontSize.size_sm,
+    alignItems: "center",
+    textAlign: "center",
     position: "absolute",
   },
-  row3FlexBox: {
+  revolutionizingSkinHealth: {
+    top: 600,
+    left: 18,
+    fontSize: 24,
+    color: "#7187be",
+    width: 325,
+    // height: 50,
+    textAlign: "center",
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+    position: "absolute",
+  },
+ 
+  buttonShellIcon: {
+    top: 0,
+    right: 0,
+    left: 0,
+    height: 53,
+  },
+  labelChild: {
+    width: 139,
+    height: 21,
+  },
+  label: {
     paddingHorizontal: 0,
-    justifyContent: "space-between",
-    flexDirection: "row",
-    paddingVertical: Padding.p_xl,
+    paddingVertical: Padding.p_11xs,
     alignItems: "center",
+    flexDirection: "row",
+    overflow: "hidden",
   },
-  modeClr: {
-    color: Color.labelColorDarkPrimary,
-    letterSpacing: 0,
+  labelWrapper: {
+    paddingLeft: Padding.p_7xs,
   },
-  leftIconLayout: {
-    height: 50,
-    width: 50,
-  },
-  batteryBasePosition: {
-    left: 0,
-    position: "absolute",
-  },
-  kmTypo: {
-    fontFamily: FontFamily.montserratSemiBold,
-    lineHeight: 22,
-    fontSize: FontSize.size_mid,
-    display: "none",
-    fontWeight: "600",
-  },
-  modeTypo: {
-    fontFamily: FontFamily.poppinsSemiBold,
-    fontWeight: "600",
-    lineHeight: 24,
-    fontSize: FontSize.size_xl,
-  },
-  accuracyTypo: {
-    fontFamily: FontFamily.montserratRegular,
-    lineHeight: 18,
-    fontSize: FontSize.size_smi,
-  },
-  batteryPosition: {
-    top: 73,
-    height: 39,
-  },
-  iconPosition: {
-    left: 1,
-    position: "absolute",
-  },
-  kmSpaceBlock: {
-    marginTop: 8,
-    textAlign: "left",
-    letterSpacing: 0,
-  },
-  text2Typo: {
-    fontFamily: FontFamily.poppinsBold,
-    fontWeight: "700",
-    color: Color.labelColorDarkPrimary,
-    letterSpacing: 0,
-  },
-  mode: {
-    textAlign: "center",
-    fontFamily: FontFamily.poppinsSemiBold,
-    fontWeight: "600",
-    lineHeight: 24,
-    fontSize: FontSize.size_xl,
-  },
-  text: {
-    display: "none",
-    textAlign: "center",
-    fontFamily: FontFamily.poppinsSemiBold,
-    fontWeight: "600",
-    lineHeight: 24,
-    fontSize: FontSize.size_xl,
-  },
-  leftArrowIconChild: {
-    borderRadius: 30,
-    top: 0,
-    height: 50,
-    width: 50,
-  },
-  text1: {
+  buttonContent: {
     top: 14,
-    left: 20,
-    color: Color.labelColorDarkSecondary,
-    textAlign: "center",
-    letterSpacing: 0,
-    position: "absolute",
-  },
-  listBullet1: {
-    top: 31,
-    right: 3,
-    transform: [
-      {
-        rotate: "-180deg",
-      },
-    ],
-    color: Color.labelColorDarkSecondary,
-    textAlign: "center",
-    letterSpacing: 0,
-    position: "absolute",
-  },
-  listBullet: {
-    top: 6,
-    left: 6,
-    width: 38,
-    height: 38,
-    position: "absolute",
-  },
-  leftArrowIcon: {
+    left: 16,
     display: "none",
-  },
-  modeParent: {
-    alignSelf: "stretch",
-  },
-  cleanseWithWarm: {
-    textAlign: "left",
-    lineHeight: 18,
-    fontSize: FontSize.size_smi,
-    color: Color.labelColorDarkSecondary,
-    fontFamily: FontFamily.montserratSemiBold,
-    fontWeight: "600",
-    letterSpacing: 0,
-    alignSelf: "stretch",
-  },
-  timesADay: {
-    marginTop: 2,
-    textAlign: "left",
-    color: Color.labelColorDarkPrimary,
-    letterSpacing: 0,
-    alignSelf: "stretch",
-  },
-  cleanseWithWarmWaterAndWiParent: {
-    width: 258,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  row3: {
-    borderRadius: 50,
-    width: 343,
-  },
-  modeDescription: {
-    marginLeft: -169,
-    top: 4,
-    width: 338,
-    paddingHorizontal: Padding.p_11xl,
-    paddingVertical: Padding.p_xl,
-    justifyContent: "center",
-    alignItems: "center",
-    left: "50%",
-    position: "absolute",
-    borderRadius: Border.br_21xl,
-  },
-  dropdownTableRow: {
-    top: 476,
-    backgroundColor: "#202122",
-    width: 330,
-    height: 314,
-    marginLeft: -165,
-    left: "50%",
-    borderRadius: Border.br_21xl,
-  },
-  batteryBase: {
-    height: 39,
-    width: 274,
-    left: 0,
-    position: "absolute",
-  },
-  batteryChargeIcon: {
-    width: 154,
-    height: 39,
-    top: 73,
-  },
-  neonEffectIcon: {
-    width: 153,
-    height: 97,
-    top: 0,
-  },
-  battery: {
-    height: 112,
-    width: 274,
-  },
-  accuracy: {
-    fontFamily: FontFamily.montserratRegular,
-    lineHeight: 18,
-    fontSize: FontSize.size_smi,
-    color: Color.labelColorDarkSecondary,
-  },
-  percentage: {
-    top: 264,
-    paddingHorizontal: 28,
-    paddingVertical: 0,
-    alignItems: "center",
-    left: "50%",
-    marginLeft: -165,
-    position: "absolute",
-  },
-  text2: {
-    fontSize: 34,
-    lineHeight: 41,
-  },
-  acne1: {
-    color: Color.labelColorDarkSecondary,
-    letterSpacing: 0,
-  },
-  acne: {
-    top: 287,
-    left: 135,
-    textAlign: "center",
-    position: "absolute",
-  },
-  image40Icon: {
-    marginLeft: -179,
-    top: 116,
-    width: 359,
-    height: 221,
-  },
-  leftArrowButton: {
-    width: 62,
-    height: 62,
-  },
-  result: {
-    fontSize: FontSize.size_9xl,
-    textAlign: "left",
-  },
-  km: {
-    color: Color.labelColorDarkTertiary,
-    fontFamily: FontFamily.montserratSemiBold,
-    lineHeight: 22,
-    fontSize: FontSize.size_mid,
-    display: "none",
-    fontWeight: "600",
-  },
-  title1: {
-    marginLeft: 31,
-  },
-  title: {
-    top: 64,
-    right: 105,
-    width: 244,
-    paddingRight: Padding.p_11xl,
     flexDirection: "row",
-    alignItems: "center",
     position: "absolute",
   },
-  screen3: {
+  endIcon: {
+    marginTop: -12,
+    top: "50%",
+    right: 14,
+    position: "absolute",
+  },
+  buttonsbutton1: {
+    top: 710,
+    left: 17,
+    width: 326,
+    height: 53,
+    position: "absolute",
+  },
+  homeIndicator: {
+    marginLeft: -67,
+    bottom: 8,
+    left: "50%",
+    borderRadius: Border.br_81xl,
+    backgroundColor: Color.labelColorDarkPrimary,
+    width: 134,
+    height: 5,
+    position: "absolute",
+  },
+  homeindicator: {
+    right: 29,
+    bottom: 38,
+    left: 31,
+    height: 34,
+    position: "absolute",
+  },
+  image41Icon: {
+    top: 6,
+    left: -11,
+    width: 479,
+    height: 492,
+    position: "absolute",
+  },
+  dermadetector: {
+    top: 41,
+    left: 108,
+    fontSize: 30,
+    fontWeight: "700",
+    fontFamily: FontFamily.poppinsBold,
+    textAlign: "left",
+    width: 250,
+    color: Color.labelColorDarkPrimary,
+    position: "absolute",
+  },
+  realTimeScreenCondition: {
+    top: 74,
+    left: 100,
+    fontWeight: "600",
+    fontFamily: FontFamily.montserratSemiBold,
+    color: "#9eecd9",
+    width: 258,
+    height: 43,
+  },
+  getStarted: {
+    top: 721,
+    left: 106,
+    width: 142,
+    height: 28,
+    color: Color.labelColorDarkPrimary,
+    fontFamily: FontFamily.poppinsMedium,
+    fontWeight: "500",
+    display: "flex",
+    fontSize: FontSize.size_sm,
+  },
+  screen1: {
+    borderRadius: Border.br_21xl,
     borderStyle: "solid",
     borderColor: Color.colorGray_100,
     borderWidth: 2,
     flex: 1,
     width: "100%",
     height: 800,
-    overflow: "hidden",
     backgroundColor: "transparent",
-    borderRadius: Border.br_21xl,
+    overflow: "hidden",
   },
 });
 
