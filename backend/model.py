@@ -10,8 +10,11 @@ transform = transforms.Compose([
 ])
 
 # Load the trained model
-model_path = '/home/shangkat5/Desktop/Viveka-Hackathon/backend/modelFile'  # Update the path to your model file
+model_path = '/home/shangkat5/Desktop/Viveka-Hackathon/backend/modelFile.pth'  # Update the path to your model file
 # model_path = 'path_to_your_model_file/modelFile.pth'  # Update the path to your model file
+
+
+
 list_diseases = ["Actinic Keratosis",
 "Basal Cell Carcinoma",
 "Dermato Fibroma",
@@ -54,5 +57,6 @@ def predict(image, model=image_model, transform=transform, device=device):
     # Get the predicted class index
     _, predicted = torch.max(output, 1)
     predicted_class = list_diseases[predicted.item()]
+    print(predicted_class,"hhhhhhhhhhhhheeeeeelllooo")
 
     return predicted_class
