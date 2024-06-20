@@ -12,11 +12,10 @@ transform = transforms.Compose([
 ])
 
 # Load the trained model
-model_path = '/home/shangkat5/Desktop/Viveka-Hackathon/backend/modelFile.pth'  # Update the path to your model file
-# model_path = 'path_to_your_model_file/modelFile.pth'  # Update the path to your model file
+model_path = './modelFile.pth'  # Update the path to your model file
 
 
-
+# list of diseases
 list_diseases = ["Actinic Keratosis",
 "Basal Cell Carcinoma",
 "Dermato Fibroma",
@@ -31,7 +30,7 @@ list_diseases = ["Actinic Keratosis",
 "Psoriasis",
 "Tinea Ringworm Candidiasis",
 "Warts Molluscum",
-"Acne/Pimples"]  # Replace with your actual list of diseases
+"Acne/Pimples"]  
 
 num_classes = len(list_diseases)  # Ensure this matches your number of classes
 image_model = models.efficientnet_b0(pretrained=False)

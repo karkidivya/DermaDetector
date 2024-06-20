@@ -11,8 +11,8 @@ app = Flask(__name__)
 CORS(app)
 
 # model and toknizer file path
-model_dir = 'backend/models/text'
-tokenizer_dir = 'backend/models/tokenizer'
+model_dir = 'models/text'
+tokenizer_dir = 'models/tokenizer'
 
 # instantiate text model class
 TEXT_MODEL = TextModel(model_dir, tokenizer_dir)
@@ -41,13 +41,22 @@ def predict_route():
     # predicted_class, confidence = 'nevus', 88.72
     # predicted_class, confidence = 'eczema', 93.23
 
+# @app.route('/testPrediction', methods=['GET'])
+def test_prediction(probable_disease, description):
+    data = request.json()
 
+    output = TEXT_MODEL.generate_text(probable_disease, description)
 
-    recommendation = TEXT_MODEL.generate_text(predicted_class, text_info)
-    return jsonify({'predicted_class': predicted_class, 'confidence' : confidence, 'recommendation' : recommendation })
+    print(output)
+    pass
+
+    # recommendation = TEXT_MODEL.generate_text(predicted_class, text_info)
+    # return jsonify({'predicted_class': predicted_class, 'confidence' : confidence, 'recommendation' : recommendation })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
 
 
 
