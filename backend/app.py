@@ -12,6 +12,7 @@ CORS(app)
 model_dir = 'backend/models/text'
 tokenizer_dir = 'backend/models/tokenizer'
 
+# ins
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong'})

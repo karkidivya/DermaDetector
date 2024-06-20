@@ -18,20 +18,17 @@ class TextModel():
             }
         ]
 
-        prompt = self.tokenizer.apply_chat_template(message, tokenizer=True, add_generation_prompt=True, return_tensors="pt")
+        disease_to_treatment_map = {
+            "eczema": "Your symptoms match those of eczema, also known as dry skin. Eczema is a common skin condition that causes dry, itchy, and inflamed skin. The treatment plan for eczema typically includes the following steps:\n\n1. Identify the cause: The first step in treating eczema is to identify the cause of the condition. This can be done through a consultation with a dermatologist or dermatological specialist.\n\n2. Mild to moderate cases: For mild to moderate cases, you may need to use gentle, non-drying soaps, lotions, and moisturizers. \n\n3. Severe cases: For severe cases, you may need to use a more potent formulation of ointment, cream, or lotion. These products are designed to soothe and moisturize the skin.\n\n4. Stress management: Stress can worsen eczema symptoms.",
+            "nevus": "Treatment plan:\n- If your symptoms are change in shape, color, rapid increase in size, itching, and pain, then you can try the following treatments:\n  - Avoid sun exposure: Wear protective clothing and use sunscreen with a high SPF to protect your skin from the sun's UV rays.\n  - Hydrate: Drink plenty of water to keep your skin hydrated and prevent dehydration.\n  - Use gentle soap: Use a mild soap to wash your skin gently, avoid using harsh chemicals that can irritate your skin.\n  - Use an emollient: Apply an emollient (such as oil or cream) to your skin to keep it soft and moisturized.\n\n2",
+            "acne": ""
+        }
 
-        output = self.model.generate(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
+        return disease_to_treatment_map[disease_pred]
+        # prompt = self.tokenizer.apply_chat_template(message, tokenizer=True, add_generation_prompt=True, return_tensors="pt")
 
-        ret_val = self.tokenizer.decode(output[0], skip_special_tokens=True)
+        # output = self.model.generate(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
 
-        return ret_val
+        # ret_val = self.tokenizer.decode(output[0], skip_special_tokens=True)
 
-# model and toknizer file path
-model_dir = 'backend/models/text'
-tokenizer_dir = 'backend/models/tokenizer'
-
-tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
-model = AutoModelForCausalLM.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
-
-tokenizer.save_pretrained(tokenizer_dir)
-model.save_pretrained(model_dir)
+        # return ret_val
