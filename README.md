@@ -17,20 +17,26 @@ This project leverages advanced machine learning techniques, specifically Convol
 
 ## Development Process and Data
 
-The project involves constructing a CNN model to predict the likelihood that a skin lesion is one of several specified skin diseases.
+The project involves constructing a CNN model along with a LLM model to predict the likelihood that a skin lesion is one of several specified skin diseases.
+The application users can click or upload their affected skin areas photo along with the description of their problem, and the model will accurately predict the disease and provides
+us the Name of disease along with the ways to prevent and/or treatment plan for it.
 In order to make the developmental task easier, we imported a pre-trained version of the efficientnet_bo model and implemented in our Skin Disease Detection tasks and further trained(fine-tuned) 
 it on multiple epochs on around 4000+ datasets of 15 different classes of skin diseases.
 The training, validation and testing losses are calculated along with the precision, accuracy, recall etc. and we viewed that these losses got significantly decreased after the completion of model
 fine-tuning.
 
 ### Data
-
+The Datasets link is presented here: 
+  https://bit.ly/45AMSHV
 The dataset used for this project comprises images from the International Skin Imaging Collaboration (ISIC), and many other datasets from Kaggle, ImageNet etc.
 The data includes both benign(non-cancerous) and malignant(cancerous) lesions, with the following breakdown:
-
 Total images used:
 - Benign Images: ~2500
 - Malignant Images: ~1500
+  
+-> More specifically the 15 classes of Skin disease images are prepared as:
+
+
 
 ### Preprocessing
 
@@ -48,6 +54,7 @@ The initial model is based on EfficientNet, a state-of-the-art CNN architecture 
 2. Transfer learning: Utilizing a pre-trained EfficientNet model and fine-tuning it with additional layers to enhance performance.
 
 ### Model Evaluation
+Receiver operating characteristics (ROC) curves are graphs showing classifiers' performance by plotting the true positive rate and false positive rate. The area under the ROC curve (AUC) measures the performance of machine learning algorithms. ROC curves visually depict the statistical accuracy of classifier selection and this curve works by plotting the true positive rate (TPR) on the y-axis and the false positive rate (FPR) on the x-axis of a graph.
 The model is evaluated using many evaluation metrices such as accuracy, recall, precision, F1Score etc. 
 
 ## Results Presentation

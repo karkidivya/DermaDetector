@@ -26,20 +26,7 @@ export default function RootLayout() {
     return null;
   }
 
-  // const [hideSplashScreen, setHideSplashScreen] = useState(true);
-
-  // const [fontsLoaded, error] = useFonts({
-    
-  //   "Poppins-Medium": require("@/assets/fonts/Poppins-Medium.ttf"),
-  //   "Poppins-SemiBold": require("@/assets/fonts/Poppins-SemiBold.ttf"),
-  //   "Poppins-Bold": require("@/assets/fonts/Poppins-Bold.ttf"),
-  //   "Montserrat-Regular": require("@/assets/fonts/Montserrat-Regular.ttf"),
-  //   "Montserrat-SemiBold": require("@/assets/fonts/Montserrat-SemiBold.ttf"),
-  // });
-
-  // if (!fontsLoaded && !error) {
-  //   return null;
-  // }
+ 
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
