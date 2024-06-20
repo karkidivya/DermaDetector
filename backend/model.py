@@ -59,7 +59,7 @@ def predict(image, model=image_model, transform=transform, device=device):
     # Get the predicted class index
     _, predicted = torch.max(output, 1)
     predicted_class = list_diseases[predicted.item()]
-    print(predicted_class,"hhhhhhhhhhhhheeeeeelllooo")
+    
 
      # Run the image through the model
     with torch.no_grad():
