@@ -125,16 +125,6 @@ For now, both the mobile phone and the laptop containg the Flask server has to b
 - Flask for backend
 - Axios for APIs
 
-# == Running the project ==
-After cloning the repository into your machine, follow these:  
-### 1. Open Derma_Detector in Terminal and run these commands:  
-`npm install`  
-`npx expo start`  
-*Make sure that npm is installed*
 
-### 2. Open backend in another terminal and run:
-`pip install -r requirements.txt`  
-`python3 app.py`  
-*Make sure that pip and python3 or python is installed*
 
 
