@@ -128,7 +128,7 @@ const Screen2 = () => {
               <Image
                 style={styles.iconLayout1}
                 resizeMode="cover"
-                source={require('../assets/images/ellipse-821.png')}
+                source={require('../assets/images/upload.jpg')}
               />
             </Pressable>}
           >
@@ -145,6 +145,8 @@ const Screen2 = () => {
             />
           </Menu>
 
+
+        </View>
           {image && (
             <Image
               source={{ uri: image }}
@@ -152,7 +154,6 @@ const Screen2 = () => {
             />
           )}
           {console.log("hello")}
-        </View>
       </Provider>
 
       <View style={[styles.modeSetting, styles.analyzeFlexBox]}>
@@ -179,10 +180,7 @@ const Screen2 = () => {
             contentFit="cover"
             source={require("../assets/images/vent.png")}
           />
-        </View>
-      </View>
-
-      <View style={[styles.analyzebutton]}>
+          <View style={[styles.analyzebutton]}>
         <Button
           title="Analyze"
            color="#d9d9d9"
@@ -190,6 +188,10 @@ const Screen2 = () => {
           onPress={getPrediction}
         />
       </View>
+        </View>
+      </View>
+
+      
 
     
     </LinearGradient>
@@ -250,7 +252,7 @@ const styles = StyleSheet.create({
   },
   analyzeFlexBox: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   typeHereFlexBox: {
     textAlign: "left",
@@ -371,7 +373,8 @@ const styles = StyleSheet.create({
     width: 326,
     left: 19,
   },
-  
+
+
   analyze: {
     top: 719,
     left: 108,
@@ -379,11 +382,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: FontFamily.poppinsMedium,
     textAlign: "center",
-    display: "flex",
+    alignItems: "center", // For centering text horizontally
+    justifyContent: "center", // For centering text vertically
     width: 142,
     height: 28,
-    color: Color.labelColorDarkPrimary,
-    justifyContent: "center",
+    borderRadius: 16,
+    color: 'rgb(12, 148, 12)',
+    position: 'absolute', // Since top and left are used
   },
   screen2: {
     borderColor: Color.colorGray_100,
