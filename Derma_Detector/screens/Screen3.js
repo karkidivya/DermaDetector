@@ -6,8 +6,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Padding, Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import * as Progress from "react-native-progress";
 const Screen3 = ({ route, navigation }) => {
-  // const { message, image } = route.params;
-
+  const { predictedClass,confidence, image } = route.params;
+// console.log(message)
   return (
     <LinearGradient
       style={styles.screen3}
@@ -30,7 +30,8 @@ const Screen3 = ({ route, navigation }) => {
           style={[styles.image40Icon]}
           contentFit="cover"
           // source={require("../assets/images/image-40@3x.png")}
-          source={require("../assets/images/download.jpeg")}
+          // source={require("../assets/images/download.jpeg")}
+          source={image}
         />
       </View>
      
@@ -43,11 +44,11 @@ const Screen3 = ({ route, navigation }) => {
         }}
       >
          <Text style={styles.acne}>
-        <Text style={[styles.text2, styles.text2Typo]}>65</Text>
-        <Text style={[styles.acne1, styles.modeTypo]}>% Acne</Text>
+        <Text style={[styles.text2, styles.text2Typo]}>{confidence} </Text>
+        <Text style={[styles.acne1, styles.modeTypo]}>% {predictedClass}</Text>
       </Text>
         <Progress.Bar
-          progress={0.3}
+          progress={confidence/100}
           width={250}
           height={20}
           color={"#9EECD9"}

@@ -71,5 +71,6 @@ def predict(image, model=image_model, transform=transform, device=device):
     confidence, predicted = torch.max(probabilities, 1)
     predicted_class = list_diseases[predicted.item()]
     confidence = confidence.item() * 100
+    confidence = "{:.2f}".format(confidence)
     
     return predicted_class, confidence

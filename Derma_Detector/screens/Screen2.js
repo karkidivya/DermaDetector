@@ -19,8 +19,9 @@ const Screen2 = () => {
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState(null);
   const [text, onChangeText] = useState("");
-  const [treatment, setTreatment] = useState("");
-
+  const [treatment, setTreatment] = useState();
+  const [predictedClass, setPredictedClass] = useState('');
+  const [confidence, setConfidence] = useState(null);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
@@ -60,11 +61,11 @@ const Screen2 = () => {
   // },[])
 
   useEffect(() => {
-    if (treatment) {
-      console.log(treatment,"here am i")
-      navigation.navigate("Screen3", { message: treatment, image: image  });
+    if (predictedClass) {
+      console.log(predictedClass,"here am i")
+      navigation.navigate("Screen3", { predictedClass: predictedClass,confidence:confidence, image: image  });
     }
-  },  [treatment, image]);
+  },  [ image,predictedClass,confidence]);
 
   const getPrediction = async () => {
     // if (!image || !text) {
@@ -85,7 +86,10 @@ const Screen2 = () => {
           image: base64data,
           text: text,
         });
-        setTreatment(res.data.predicted_class);
+        const data = res.data;
+      setPredictedClass(data.predicted_class);
+      setConfidence(data.confidence);
+        // setTreatment(res.data.predicted_class);
         // console.log(treatment, "value returned")
         // if(treatment){
         //   navigation.navigate("Screen1", { message:  treatment })

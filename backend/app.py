@@ -26,12 +26,11 @@ def predict_route():
 
     # Predict using the model
     predicted_class, confidence = predict(image)
-    print(predicted_class)
+    print(predicted_class, "test", confidence)
     return jsonify({'predicted_class': predicted_class, 'confidence' : confidence })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
 
 
 

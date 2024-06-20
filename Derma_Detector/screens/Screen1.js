@@ -60,9 +60,9 @@ const Screen1 = () => {
           />
         </>
       </TouchableHighlight>
-      <View style={styles.homeindicator}>
+      {/* <View style={styles.homeindicator}>
         <View style={styles.homeIndicator} />
-      </View>
+      </View> */}
       <Image
         style={styles.image41Icon}
         contentFit="cover"
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     height: 43,
   },
   getStarted: {
-    top: 721,
+    top: 725,
     left: 106,
     width: 142,
     height: 28,
