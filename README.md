@@ -69,10 +69,12 @@ Receiver operating characteristics (ROC) curves are graphs showing classifiers' 
 The model is evaluated using many evaluation metrices such as accuracy, recall, precision, F1Score etc. 
 ![ROC_curve](https://github.com/karkidivya/Viveka-Hackathon/assets/83759652/418fa691-310b-4b39-9b6a-108c82938666)
 
-#Explanation about the above ROC Curve
-
+#Explanation about the above ROC Curve: 
 A ROC curve should be as close to the top-left corner of the graph as possible. This indicates that the model is good at distinguishing between positive and negative cases. A curve closer to the diagonal line indicates a model that performs no better than random guessing.
 In the image, all the ROC curves are close to the top-left corner, which suggests that the model performs well at classifying all the different skin lesions. 
+
+###tinyllama
+Incorporating TinyLLM for text description processing significantly enhanced the accuracy of our skin disease detection model. TinyLLM, a lightweight yet powerful language model, was employed to analyze and interpret textual descriptions provided by users about their skin conditions. This includes details such as the presence of itching, pain, changes in color, and other relevant symptoms. By processing these textual inputs alongside the image data, TinyLLM enabled our model to gain a more comprehensive understanding of the patient's condition. This multimodal approach allowed the model to leverage both visual and contextual information, leading to more accurate and reliable predictions
 
 ## Results Presentation
 
