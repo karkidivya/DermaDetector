@@ -67,6 +67,8 @@ The initial model is based on EfficientNet, a state-of-the-art CNN architecture 
 ### Model Evaluation
 Receiver operating characteristics (ROC) curves are graphs showing classifiers' performance by plotting the true positive rate and false positive rate. The area under the ROC curve (AUC) measures the performance of machine learning algorithms. ROC curves visually depict the statistical accuracy of classifier selection and this curve works by plotting the true positive rate (TPR) on the y-axis and the false positive rate (FPR) on the x-axis of a graph.
 The model is evaluated using many evaluation metrices such as accuracy, recall, precision, F1Score etc. 
+![ROC_curve](https://github.com/karkidivya/Viveka-Hackathon/assets/83759652/418fa691-310b-4b39-9b6a-108c82938666)
+
 
 ## Results Presentation
 
