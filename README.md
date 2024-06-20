@@ -34,8 +34,22 @@ Total images used:
 - Benign Images: ~2500
 - Malignant Images: ~1500
   
--> More specifically the 15 classes of Skin disease images are prepared as:
-
+-> More specifically the 15 classes of Skin disease images are prepared as:  
+- Actinic Keratosis  
+- Basal Cell Carcinoma  
+- Dermato Fibroma  
+- Melanoma  
+- Nevus  
+- Pigmented Benign Keratosis  
+- Seborrheic Keratosis  
+- Squamous Cell Carcinoma  
+- Vascular Lesion  
+- Eczema  
+- Atopic Dermatitis  
+- Psoriasis  
+- Tinea Ringworm Candidiasis  
+- Warts Molluscum  
+- Acne/Pimples  
 
 
 ### Preprocessing
@@ -63,9 +77,9 @@ The final tool predicts the likelihood that a skin lesion is one of several spec
 
 ### Mobile Applications
   #Android App
-Our CNN model will be loaded into the mobile phone to make local predictions. Advantages: The image then will be send to the backend server and processed, after that the result of the 
-prediction is sent back to mobile along with the some skin care recommendations.
+Our CNN model is loaded into the mobile phone to make local predictions. Advantages: The image then will be send to the backend server and processed, after that the result of the prediction is sent back to mobile along with the some skin care recommendations.
 For now, both the mobile phone and the laptop containg the Flask server has to be connected in the same Wi-Fi network in order to send_request and receive_response from mobile UI and backend respectively.
+
 ## Project Schedule
 
 | Activity                           | Days | Status | Progress |
@@ -84,8 +98,20 @@ For now, both the mobile phone and the laptop containg the Flask server has to b
 - Pytorch (Google Colab GPU High Performance Cloud Computing)
 - Python
 - Matplotlib
-- Scikit-learn
-- Flask (for API development)
+- React native for App development
+- Flask for backend
+- Axios for APIs
 
+# == Running the project ==
+After cloning the repository into your machine, follow these:  
+### 1. Open Derma_Detector in Terminal and run these commands:  
+`npm install`  
+`npx expo start`  
+*Make sure that npm is installed*
+
+### 2. Open backend in another terminal and run:
+`pip install -r requirements.txt`  
+`python3 app.py`  
+*Make sure that pip and python3 or python is installed*
 
 
