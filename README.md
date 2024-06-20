@@ -62,10 +62,33 @@ The model is evaluated using many evaluation metrices such as accuracy, recall, 
 The final tool predicts the likelihood that a skin lesion is one of several specified skin diseases. The results are presented to the user through mobile applications.
 
 ### Mobile Applications
-  #Android App
-Our CNN model will be loaded into the mobile phone to make local predictions. Advantages: The image then will be send to the backend server and processed, after that the result of the 
-prediction is sent back to mobile along with the some skin care recommendations.
+  #Mobile Application (React Native Expo)
+Our CNN model will be loaded into the backend(Flask) to make local predictions. The image and symptoms information then will be send to the backend server and processed, after that the result of the prediction is sent back to mobile app along with the skin disease name, prediction accuracy, skin care recommendations.
 For now, both the mobile phone and the laptop containg the Flask server has to be connected in the same Wi-Fi network in order to send_request and receive_response from mobile UI and backend respectively.
+
+## Get started with expo
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Start the app
+   ```bash
+    npx expo start
+   ```
+3. Update the .env file with your device ip address
+  ```bash
+    YOUR_IP_ADDRESS = 192.162.1.66 
+   ```
+## Get started with Flask(backend)
+   1. Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Start the app
+   ```bash
+    python3 app.py
+   ```
+
 ## Project Schedule
 
 | Activity                           | Days | Status | Progress |
