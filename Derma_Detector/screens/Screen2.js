@@ -19,7 +19,9 @@ const Screen2 = () => {
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState(null);
   const [text, onChangeText] = useState("");
-
+  const [treatment, setTreatment] = useState();
+  const [predictedClass, setPredictedClass] = useState('');
+  const [confidence, setConfidence] = useState(null);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
@@ -44,19 +46,27 @@ const Screen2 = () => {
     }
     closeMenu();
   };
-  useEffect(()=>{
-    const testConnection = async () => {
-      try {
-        const res = await axios.get('http://192.168.1.78:5000/ping');  // replace with your computer's IP address
-        console.log(res.data);
-      } catch (error) {
-        console.error('Error connecting to the server', error);
-      }
-    };
+  // useEffect(()=>{
+  //   const testConnection = async () => {
+  //     try {
+  //       const res = await axios.get('http://192.168.1.78:5000/ping');  // replace with your computer's IP address
+  //       console.log(res.data);
+  //     } catch (error) {
+  //       console.error('Error connecting to the server', error);
+  //     }
+  //   };
     
-    testConnection();
+  //   testConnection();
     
-  },[])
+  // },[])
+
+  useEffect(() => {
+    if (predictedClass) {
+      console.log(predictedClass,"here am i")
+      navigation.navigate("Screen3", { predictedClass: predictedClass,confidence:confidence, image: image  });
+    }
+  },  [ image,predictedClass,confidence]);
+
   const getPrediction = async () => {
     // if (!image || !text) {
     //   alert('Please provide both image and text description');
@@ -76,13 +86,25 @@ const Screen2 = () => {
           image: base64data,
           text: text,
         });
-        // setTreatment(res.data.treatment_solution);
+        const data = res.data;
+      setPredictedClass(data.predicted_class);
+      setConfidence(data.confidence);
+        // setTreatment(res.data.predicted_class);
+        // console.log(treatment, "value returned")
+        // if(treatment){
+        //   navigation.navigate("Screen1", { message:  treatment })
+        // }
+        // console.log(treatment, "value returned")
       } catch (error) {
         console.error(error);
         alert('Error getting treatment solution');
       }
     };
     reader.readAsDataURL(blob);
+    // if(treatment){
+    //   navigation.navigate("Screen1", { message:  treatment })
+    // }
+    
   };
 
   return (
@@ -110,18 +132,7 @@ const Screen2 = () => {
               />
             </Pressable>}
           >
-          {/* <Button onPress={openMenu} title="Open Menu" ><Image
-        style={[styles.screen2Child, styles.iconLayout1]}
-        contentFit="cover"
-        source={require("../assets/images/ellipse-821.png")}
-        onPress={openMenu} title="Open Menu"
-      /></Button>
-
-          <Menu
-            visible={visible}
-            onDismiss={closeMenu}
-            anchor={<Button onPress={openMenu} title="Choose an option" />}
-          > */}
+        
             
 
             <Menu.Item
@@ -354,34 +365,13 @@ const styles = StyleSheet.create({
     paddingLeft: Padding.p_7xs,
   },
 
-  // endIcon: {
-  //   marginTop: -12,
-  //   top: "50%",
-  //   right: 14,
-  //   position: "absolute",
-  // },
+ 
   buttonsbutton2: {
     top: 708,
     width: 326,
     left: 19,
   },
-  // homeIndicator: {
-  //   marginLeft: -67,
-  //   bottom: 8,
-  //   left: "50%",
-  //   borderRadius: Border.br_81xl,
-  //   backgroundColor: Color.labelColorDarkPrimary,
-  //   width: 134,
-  //   height: 5,
-  //   position: "absolute",
-  // },
-  // homeindicator: {
-  //   right: 27,
-  //   bottom: 40,
-  //   left: 33,
-  //   height: 34,
-  //   position: "absolute",
-  // },
+  
   analyze: {
     top: 719,
     left: 108,
