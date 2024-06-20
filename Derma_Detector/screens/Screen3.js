@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Padding, Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import * as Progress from "react-native-progress";
 const Screen3 = ({ route, navigation }) => {
-  const { predictedClass,confidence, image } = route.params;
+  const { predictedClass,confidence,recommendation, image } = route.params;
 // console.log(message)
   return (
     <LinearGradient
@@ -61,9 +61,8 @@ const Screen3 = ({ route, navigation }) => {
         <View style={styles.cleanseWithWarmWaterAndWiParent}>
           <Text style={styles.cleanseWithWarm}>Suggestions</Text>
           <Text style={[styles.timesADay, styles.accuracyTypo]}>
-            2 times a day gggggg
-            xzzzzassssssssssssssssssssssssssssssssssssssssssssssdddddddddddddzzzzzzxeeeeeeeewwwweeeeeeeeeeeesasxasaxasxaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsssssssssssssssssssssssssssssssssssssssssssssssssaaaaadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssssssssssssssssszzzzzzzzzzzzxeeeeeeeewwwweeeeeeeeeeeesasxasaxasxaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxeeeeeeeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-          </Text>
+            {recommendation}
+             </Text>
         </View>
       </View>
 

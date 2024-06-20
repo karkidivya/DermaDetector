@@ -21,6 +21,7 @@ const Screen2 = () => {
   const [treatment, setTreatment] = useState();
   const [predictedClass, setPredictedClass] = useState('');
   const [confidence, setConfidence] = useState(null);
+  const [recommendation, setRecommendation] = useState('');
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
@@ -62,9 +63,9 @@ const Screen2 = () => {
   useEffect(() => {
     if (predictedClass) {
       console.log(predictedClass,"here am i")
-      navigation.navigate("Screen3", { predictedClass: predictedClass,confidence:confidence, image: image  });
+      navigation.navigate("Screen3", { predictedClass: predictedClass,confidence:confidence, image: image, recommendation : recommendation  });
     }
-  },  [ image,predictedClass,confidence]);
+  },  [ image,predictedClass,confidence,recommendation]);
 
   const getPrediction = async () => {
     // if (!image || !text) {
@@ -88,6 +89,7 @@ const Screen2 = () => {
         const data = res.data;
       setPredictedClass(data.predicted_class);
       setConfidence(data.confidence);
+      setRecommendation(data.recommendation)
         // setTreatment(res.data.predicted_class);
         
       } catch (error) {
@@ -140,12 +142,13 @@ const Screen2 = () => {
 
 
         </View>
-          {image && (
+        <View style={{display:'flex',justifyContent:"center",alignItems:"center", borderRadius:20}}>{image && (
             <Image
               source={{ uri: image }}
-              style={{ width: 200, height: 200, marginTop: 20 }}
+              style={{ width: 200, height: 200, marginTop: 20, borderRadius:20 }}
             />
-          )}
+          )}</View>
+          
           
       </Provider>
 
@@ -164,6 +167,7 @@ const Screen2 = () => {
             onChangeText={onChangeText}
             value={text}
             placeholder="Type here.."
+            color="white"
             // keyboardType="numeric"
           />
         </SafeAreaView>
@@ -291,7 +295,7 @@ const styles = StyleSheet.create({
   },
   modeSetting: {
    
-    backgroundColor: "#505F3D",
+    backgroundColor: "#202122",
     borderColor: Color.labelColorDarkPrimary,
     borderWidth: 1,
     paddingHorizontal: 50,
