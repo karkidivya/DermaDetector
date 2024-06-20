@@ -8,6 +8,10 @@ from model import predict  # Import the predict function from model.py
 app = Flask(__name__)
 CORS(app)
 
+# model and toknizer file path
+model_dir = 'backend/models/text'
+tokenizer_dir = 'backend/models/tokenizer'
+
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong'})

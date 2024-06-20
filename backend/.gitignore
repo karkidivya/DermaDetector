@@ -17,5 +17,8 @@
 /backend/db.sqlite3
 
 
+/models/text
+
+
 /model.h5
 /myenv
