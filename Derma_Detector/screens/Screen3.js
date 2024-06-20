@@ -1,221 +1,338 @@
 import * as React from "react";
-import {
-  Text,
-  StyleSheet,
-  Pressable,
-  View,
-  TouchableHighlight,
-} from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
+import { ProgressBar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
-import { FontSize, FontFamily, Padding, Border, Color } from "../GlobalStyles";
-
-const Screen3 = () => {
-  const navigation = useNavigation();
-
+import { Padding, Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import * as Progress from "react-native-progress";
+const Screen3 = ({ route, navigation }) => {
+  const { predictedClass,confidence, image } = route.params;
+// console.log(message)
   return (
     <LinearGradient
-      style={styles.screen1}
+      style={styles.screen3}
       locations={[0, 0.99]}
-      colors={["#2a2d32", "#131313"]}
+      colors={["#2a2d32", "#1d1d1d"]}
     >
-      <Text style={styles.revolutionizingSkinHealth}>
-        Revolutionizing skin health diagnostics with AI
-      </Text>
-      <TouchableHighlight
-        style={styles.buttonsbutton1}
-        underlayColor="#fff"
-        activeOpacity={0.2}
-        // onPress={() => navigation.navigate("/Modeltester")}
-        onPress={() => navigation.navigate("Screen2")}
-      >
-        <>
-        
-          <Image
-            style={[styles.buttonShellIcon, styles.iconLayout1]}
-            contentFit="cover"
-            source={require("../assets/images/button-shell.png")}
-          />
-          <View style={styles.buttonContent}>
-            <Image
-              style={styles.iconLayout}
-              contentFit="cover"
-              source={require("../assets/images/start-icon.png")}
-            />
-            <View style={styles.labelWrapper}>
-              <View style={styles.label}>
-                <Image
-                  style={styles.labelChild}
-                  contentFit="cover"
-                  source={require("../assets/images/group-1.png")}
-                />
-              </View>
-            </View>
-          </View>
-          <Image
-            style={[styles.endIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/images/end-icon.png")}
-          />
-        </>
-      </TouchableHighlight>
-      <View style={styles.homeindicator}>
-        <View style={styles.homeIndicator} />
+      <View style={{display:'flex', justifyContent:"space-around", flex:1}}>
+      <View style={styles.title}>
+        <Image
+          style={styles.leftArrowButton}
+          contentFit="cover"
+          source={require("../assets/images/left-arrow-button.png")}
+        />
+        <View style={styles.title1}>
+          <Text style={[styles.result, styles.text2Typo]}>Result</Text>
+        </View>
       </View>
-      <Image
-        style={styles.image41Icon}
-        contentFit="cover"
-        source={require("../assets/images/image-41.png")}
-      />
-      <Text style={styles.dermadetector}>DermaDetector</Text>
-      <Text style={[styles.realTimeScreenCondition, styles.getStartedFlexBox]}>
-        Real-time screen condition analysis
+      <View style={[styles.image40IconPosition]}>
+        <Image
+          style={[styles.image40Icon]}
+          contentFit="cover"
+          // source={require("../assets/images/image-40@3x.png")}
+          // source={require("../assets/images/download.jpeg")}
+          source={image}
+        />
+      </View>
+     
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: 15,
+        }}
+      >
+         <Text style={styles.acne}>
+        <Text style={[styles.text2, styles.text2Typo]}>{confidence} </Text>
+        <Text style={[styles.acne1, styles.modeTypo]}>% {predictedClass}</Text>
       </Text>
-      <Text style={[styles.getStarted, styles.getStartedFlexBox]}>
-        Get Started
-      </Text>
+        <Progress.Bar
+          progress={confidence/100}
+          width={250}
+          height={20}
+          color={"#9EECD9"}
+        />
+        <Text style={[styles.accuracy, styles.kmSpaceBlock]}>
+          Seriousness: 0.2%
+        </Text>
+      </View>
+      <View style={[styles.row3, styles.row3FlexBox]}>
+        <View style={styles.cleanseWithWarmWaterAndWiParent}>
+          <Text style={styles.cleanseWithWarm}>Suggestions</Text>
+          <Text style={[styles.timesADay, styles.accuracyTypo]}>
+            2 times a day gggggg
+            xzzzzassssssssssssssssssssssssssssssssssssssssssssssdddddddddddddzzzzzzxeeeeeeeewwwweeeeeeeeeeeesasxasaxasxaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsssssssssssssssssssssssssssssssssssssssssssssssssaaaaadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaassssssssssssssssssssssssssssssssssssssssssssssssszzzzzzzzzzzzxeeeeeeeewwwweeeeeeeeeeeesasxasaxasxaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxeeeeeeeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          </Text>
+        </View>
+      </View>
+
+      </View>
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  iconLayout1: {
-    maxWidth: "100%",
-    position: "absolute",
-    overflow: "hidden",
+  progressbar: {
+    height: 39,
+    width: 274,
   },
-  iconLayout: {
-    height: 24,
-    width: 24,
-    display: "none",
-  },
-  getStartedFlexBox: {
+  image40IconPosition: {
+    display: "flex",
     justifyContent: "center",
-    display: "flex",
-    fontSize: FontSize.size_sm,
     alignItems: "center",
-    textAlign: "center",
-    position: "absolute",
   },
-  revolutionizingSkinHealth: {
-    top: 600,
-    left: 18,
-    fontSize: 24,
-    color: "#7187be",
-    width: 325,
-    // height: 50,
-    textAlign: "center",
-    fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
-    position: "absolute",
-  },
- 
-  buttonShellIcon: {
-    top: 0,
-    right: 0,
-    left: 0,
-    height: 53,
-  },
-  labelChild: {
-    width: 139,
-    height: 21,
-  },
-  label: {
+  row3FlexBox: {
     paddingHorizontal: 0,
-    paddingVertical: Padding.p_11xs,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingVertical: Padding.p_xl,
     alignItems: "center",
-    flexDirection: "row",
-    overflow: "hidden",
-  },
-  labelWrapper: {
-    paddingLeft: Padding.p_7xs,
-  },
-  buttonContent: {
-    top: 14,
-    left: 16,
-    display: "none",
-    flexDirection: "row",
-    position: "absolute",
-  },
-  endIcon: {
-    marginTop: -12,
-    top: "50%",
-    right: 14,
-    position: "absolute",
-  },
-  buttonsbutton1: {
-    top: 710,
-    left: 17,
-    width: 326,
-    height: 53,
-    position: "absolute",
-  },
-  homeIndicator: {
-    marginLeft: -67,
-    bottom: 8,
-    left: "50%",
-    borderRadius: Border.br_81xl,
-    backgroundColor: Color.labelColorDarkPrimary,
-    width: 134,
-    height: 5,
-    position: "absolute",
-  },
-  homeindicator: {
-    right: 29,
-    bottom: 38,
-    left: 31,
-    height: 34,
-    position: "absolute",
-  },
-  image41Icon: {
-    top: 6,
-    left: -11,
-    width: 479,
-    height: 492,
-    position: "absolute",
-  },
-  dermadetector: {
-    top: 41,
-    left: 108,
-    fontSize: 30,
-    fontWeight: "700",
-    fontFamily: FontFamily.poppinsBold,
-    textAlign: "left",
-    width: 250,
-    color: Color.labelColorDarkPrimary,
-    position: "absolute",
-  },
-  realTimeScreenCondition: {
-    top: 74,
-    left: 100,
-    fontWeight: "600",
-    fontFamily: FontFamily.montserratSemiBold,
-    color: "#9eecd9",
-    width: 258,
-    height: 43,
-  },
-  getStarted: {
-    top: 721,
-    left: 106,
-    width: 142,
-    height: 28,
-    color: Color.labelColorDarkPrimary,
-    fontFamily: FontFamily.poppinsMedium,
-    fontWeight: "500",
     display: "flex",
-    fontSize: FontSize.size_sm,
+    justifyContent: "center",
+    backgroundColor: "#202122",
+    borderRadius: 40,
+    // width: 343,
+    marginTop: 20,
   },
-  screen1: {
+  modeClr: {
+    color: Color.labelColorDarkPrimary,
+    letterSpacing: 0,
+  },
+  leftIconLayout: {
+    height: 50,
+    width: 50,
+  },
+  batteryBasePosition: {
+    left: 0,
+    position: "absolute",
+  },
+  kmTypo: {
+    fontFamily: FontFamily.montserratSemiBold,
+    lineHeight: 22,
+    fontSize: FontSize.size_mid,
+    display: "none",
+    fontWeight: "600",
+  },
+  modeTypo: {
+    fontFamily: FontFamily.poppinsSemiBold,
+    fontWeight: "600",
+    lineHeight: 24,
+    fontSize: FontSize.size_xl,
+  },
+  accuracyTypo: {
+    fontFamily: FontFamily.montserratRegular,
+    lineHeight: 18,
+    fontSize: FontSize.size_smi,
+  },
+  batteryPosition: {
+    top: 73,
+    height: 39,
+  },
+  iconPosition: {
+    left: 1,
+    position: "absolute",
+  },
+  kmSpaceBlock: {
+    marginTop: 8,
+    textAlign: "left",
+    letterSpacing: 0,
+  },
+  text2Typo: {
+    fontFamily: FontFamily.poppinsBold,
+    fontWeight: "700",
+    color: Color.labelColorDarkPrimary,
+    letterSpacing: 0,
+  },
+  mode: {
+    textAlign: "center",
+    fontFamily: FontFamily.poppinsSemiBold,
+    fontWeight: "600",
+    lineHeight: 24,
+    fontSize: FontSize.size_xl,
+  },
+  text: {
+    display: "none",
+    textAlign: "center",
+    fontFamily: FontFamily.poppinsSemiBold,
+    fontWeight: "600",
+    lineHeight: 24,
+    fontSize: FontSize.size_xl,
+  },
+  leftArrowIconChild: {
+    borderRadius: 30,
+    top: 0,
+    height: 50,
+    width: 50,
+  },
+  text1: {
+    top: 14,
+    left: 20,
+    color: Color.labelColorDarkSecondary,
+    textAlign: "center",
+    letterSpacing: 0,
+    position: "absolute",
+  },
+  listBullet1: {
+    top: 31,
+    right: 3,
+    transform: [
+      {
+        rotate: "-180deg",
+      },
+    ],
+    color: Color.labelColorDarkSecondary,
+    textAlign: "center",
+    letterSpacing: 0,
+    position: "absolute",
+  },
+  listBullet: {
+    top: 6,
+    left: 6,
+    width: 38,
+    height: 38,
+    position: "absolute",
+  },
+  leftArrowIcon: {
+    display: "none",
+  },
+  modeParent: {
+    alignSelf: "stretch",
+  },
+  cleanseWithWarm: {
+    textAlign: "left",
+    lineHeight: 18,
+    fontSize: FontSize.size_smi,
+    color: Color.labelColorDarkSecondary,
+    fontFamily: FontFamily.montserratSemiBold,
+    fontWeight: "600",
+    letterSpacing: 0,
+    alignSelf: "stretch",
+  },
+  timesADay: {
+    marginTop: 2,
+    textAlign: "left",
+    color: Color.labelColorDarkPrimary,
+    letterSpacing: 0,
+    alignSelf: "stretch",
+  },
+  cleanseWithWarmWaterAndWiParent: {
+    width: 258,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  modeDescription: {
+    marginLeft: -169,
+    top: 4,
+    width: 338,
+    paddingHorizontal: Padding.p_11xl,
+    paddingVertical: Padding.p_xl,
+    justifyContent: "center",
+    alignItems: "center",
+    left: "50%",
+    position: "absolute",
     borderRadius: Border.br_21xl,
+  },
+  dropdownTableRow: {
+    top: 476,
+    backgroundColor: "#202122",
+    width: 330,
+    height: 314,
+    marginLeft: -165,
+    left: "50%",
+    borderRadius: Border.br_21xl,
+  },
+  batteryBase: {
+    height: 39,
+    width: 274,
+    left: 0,
+    position: "absolute",
+  },
+  batteryChargeIcon: {
+    width: 154,
+    height: 39,
+    top: 73,
+  },
+  neonEffectIcon: {
+    width: 153,
+    height: 97,
+    top: 0,
+  },
+  battery: {
+    height: 112,
+    width: 274,
+  },
+  accuracy: {
+    fontFamily: FontFamily.montserratRegular,
+    lineHeight: 18,
+    fontSize: FontSize.size_smi,
+    color: Color.labelColorDarkSecondary,
+  },
+  percentage: {
+    top: 264,
+    paddingHorizontal: 28,
+    paddingVertical: 0,
+    alignItems: "center",
+    left: "50%",
+    marginLeft: -165,
+    position: "absolute",
+  },
+  text2: {
+    fontSize: 34,
+    lineHeight: 41,
+  },
+  acne1: {
+    color: Color.labelColorDarkSecondary,
+    letterSpacing: 0,
+  },
+  acne: {
+    // top: 287,
+    // left: 135,
+    textAlign: "center",
+    // position: "absolute",
+  },
+  image40Icon: {
+    width: 150,
+    height: 150,
+  },
+  leftArrowButton: {
+    width: 62,
+    height: 62,
+  },
+  result: {
+    // marginTop: 20,
+    fontSize: FontSize.size_9xl,
+    textAlign: "left",
+  },
+  km: {
+    color: Color.labelColorDarkTertiary,
+    fontFamily: FontFamily.montserratSemiBold,
+    lineHeight: 22,
+    fontSize: FontSize.size_mid,
+    display: "none",
+    fontWeight: "600",
+  },
+  title1: {
+    // marginLeft: 31,
+  },
+  title: {
+    marginTop: 20,
+    // paddingRight: Padding.p_11xl,
+    flexDirection: "row",
+    alignItems: "center",
+    // position: "absolute",
+  },
+  screen3: {
     borderStyle: "solid",
     borderColor: Color.colorGray_100,
     borderWidth: 2,
     flex: 1,
     width: "100%",
     height: 800,
-    backgroundColor: "transparent",
     overflow: "hidden",
+    backgroundColor: "transparent",
+    borderRadius: Border.br_21xl,
   },
 });
 

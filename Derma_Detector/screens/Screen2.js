@@ -1,25 +1,26 @@
 import * as React from "react";
 import { useState,useEffect } from "react";
-// import { Image } from "expo-image";
 import { StyleSheet, Text, Pressable, TouchableHighlight } from "react-native";
 import { SafeAreaView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
 
-import Test from "@/components/Cameratest";
 
 import { View, Button, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Menu, Provider } from "react-native-paper";
 import axios from 'axios';
+import { YOUR_IP_ADDRESS} from '@env';
 const Screen2 = () => {
   const navigation = useNavigation();
 
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState(null);
   const [text, onChangeText] = useState("");
-
+  const [treatment, setTreatment] = useState();
+  const [predictedClass, setPredictedClass] = useState('');
+  const [confidence, setConfidence] = useState(null);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
@@ -44,19 +45,27 @@ const Screen2 = () => {
     }
     closeMenu();
   };
-  useEffect(()=>{
-    const testConnection = async () => {
-      try {
-        const res = await axios.get('http://192.168.1.78:5000/ping');  // replace with your computer's IP address
-        console.log(res.data);
-      } catch (error) {
-        console.error('Error connecting to the server', error);
-      }
-    };
+  // useEffect(()=>{
+  //   const testConnection = async () => {
+  //     try {
+  //       const res = await axios.get('http://192.168.1.78:5000/ping');  // replace with your computer's IP address
+  //       console.log(res.data);
+  //     } catch (error) {
+  //       console.error('Error connecting to the server', error);
+  //     }
+  //   };
     
-    testConnection();
+  //   testConnection();
     
-  },[])
+  // },[])
+
+  useEffect(() => {
+    if (predictedClass) {
+      console.log(predictedClass,"here am i")
+      navigation.navigate("Screen3", { predictedClass: predictedClass,confidence:confidence, image: image  });
+    }
+  },  [ image,predictedClass,confidence]);
+
   const getPrediction = async () => {
     // if (!image || !text) {
     //   alert('Please provide both image and text description');
@@ -69,20 +78,26 @@ const Screen2 = () => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64data = reader.result.split(',')[1];
-      console.log(base64data, text)
+      // console.log(base64data, text)
       // Send the image and text to the backend
       try {
-        const res =  await axios.post('http://192.168.1.78:5000/predict', {
+        const res =  await axios.post(`http://${YOUR_IP_ADDRESS}:5000/predict`, {
           image: base64data,
           text: text,
         });
-        // setTreatment(res.data.treatment_solution);
+        const data = res.data;
+      setPredictedClass(data.predicted_class);
+      setConfidence(data.confidence);
+        // setTreatment(res.data.predicted_class);
+        
       } catch (error) {
         console.error(error);
         alert('Error getting treatment solution');
       }
     };
     reader.readAsDataURL(blob);
+    
+    
   };
 
   return (
@@ -106,22 +121,11 @@ const Screen2 = () => {
               <Image
                 style={styles.iconLayout1}
                 resizeMode="cover"
-                source={require('../assets/images/ellipse-821.png')}
+                source={require('../assets/images/upload.jpg')}
               />
             </Pressable>}
           >
-          {/* <Button onPress={openMenu} title="Open Menu" ><Image
-        style={[styles.screen2Child, styles.iconLayout1]}
-        contentFit="cover"
-        source={require("../assets/images/ellipse-821.png")}
-        onPress={openMenu} title="Open Menu"
-      /></Button>
-
-          <Menu
-            visible={visible}
-            onDismiss={closeMenu}
-            anchor={<Button onPress={openMenu} title="Choose an option" />}
-          > */}
+        
             
 
             <Menu.Item
@@ -134,14 +138,15 @@ const Screen2 = () => {
             />
           </Menu>
 
+
+        </View>
           {image && (
             <Image
               source={{ uri: image }}
               style={{ width: 200, height: 200, marginTop: 20 }}
             />
           )}
-          {console.log("hello")}
-        </View>
+          
       </Provider>
 
       <View style={[styles.modeSetting, styles.analyzeFlexBox]}>
@@ -168,17 +173,18 @@ const Screen2 = () => {
             contentFit="cover"
             source={require("../assets/images/vent.png")}
           />
-        </View>
-      </View>
-
-      <View style={[styles.analyzebutton]}>
+          <View style={[styles.analyzebutton]}>
         <Button
           title="Analyze"
-           color="#d9d9d9"
+           color="#89B565"
           // onPress={() => navigation.navigate("Screen1")}
           onPress={getPrediction}
         />
       </View>
+        </View>
+      </View>
+
+      
 
     
     </LinearGradient>
@@ -233,13 +239,13 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_21xl,
   },
   iconLayout1: {
-    width: 110, // Adjust the width and height of the ellipse image
-    height: 110, // to fit your design requirements
-    marginLeft: 10, // Adjust margins as needed
+    width: 110, 
+    height: 110,
+    marginLeft: 10, 
   },
   analyzeFlexBox: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   typeHereFlexBox: {
     textAlign: "left",
@@ -249,33 +255,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  // buttonsbutton2Layout: {
-  //   height: 53,
-  //   position: "absolute",
-  // },
+  
   iconLayout: {
     height: 24,
     width: 24,
     display: "none",
   },
   screen2Child: {
-    // top: 198,
-    // right: 96,
-    // bottom: 438,
-    // left: 96,
+   
     borderRadius: 933,
     maxHeight: "100%",
-    // position: "absolute",
+    
   },
   additionalInformationAbout: {
-    // width: 385,
-    // height: 18,
+   
     color: Color.labelColorDarkPrimary,
-    // fontFamily: FontFamily.montserratRegular,
-    // lineHeight: 18,
-    // fontSize: FontSize.size_smi,
-    // textAlign: "left",
-    // letterSpacing: 0,
+   
   },
   modeSettingChild: {
     borderRadius: 8,
@@ -295,10 +290,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   modeSetting: {
-    // right: -1,
-    // bottom: 161,
-    // left: 1,
-    backgroundColor: "rgba(255, 255, 255, 0.44)",
+   
+    backgroundColor: "#505F3D",
     borderColor: Color.labelColorDarkPrimary,
     borderWidth: 1,
     paddingHorizontal: 50,
@@ -308,31 +301,19 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_21xl,
   },
   getYourSkin: {
-    // top: 97,
+    
     marginTop: 57,
     marginLeft: 19,
     fontSize: FontSize.size_9xl,
     fontWeight: "700",
     fontFamily: FontFamily.poppinsBold,
-    // left: 19,
+  
     color: Color.labelColorDarkPrimary,
     textAlign: "left",
     letterSpacing: 0,
-    // position: "absolute",
+    
   },
-  // typeHere: {
-  //   top: 535,
-  //   left: 54,
-  //   color: "#000",
-  //   width: 290,
-  //   opacity: 0.6,
-  //   fontFamily: FontFamily.montserratRegular,
-  //   lineHeight: 18,
-  //   fontSize: FontSize.size_smi,
-  //   textAlign: "left",
-  //   letterSpacing: 0,
-  //   position: "absolute",
-  // },
+ 
 
   buttonShellIcon: {
     top: 0,
@@ -354,34 +335,14 @@ const styles = StyleSheet.create({
     paddingLeft: Padding.p_7xs,
   },
 
-  // endIcon: {
-  //   marginTop: -12,
-  //   top: "50%",
-  //   right: 14,
-  //   position: "absolute",
-  // },
+ 
   buttonsbutton2: {
     top: 708,
     width: 326,
     left: 19,
   },
-  // homeIndicator: {
-  //   marginLeft: -67,
-  //   bottom: 8,
-  //   left: "50%",
-  //   borderRadius: Border.br_81xl,
-  //   backgroundColor: Color.labelColorDarkPrimary,
-  //   width: 134,
-  //   height: 5,
-  //   position: "absolute",
-  // },
-  // homeindicator: {
-  //   right: 27,
-  //   bottom: 40,
-  //   left: 33,
-  //   height: 34,
-  //   position: "absolute",
-  // },
+
+
   analyze: {
     top: 719,
     left: 108,
@@ -389,11 +350,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: FontFamily.poppinsMedium,
     textAlign: "center",
-    display: "flex",
+    alignItems: "center", // For centering text horizontally
+    justifyContent: "center", // For centering text vertically
     width: 142,
     height: 28,
-    color: Color.labelColorDarkPrimary,
-    justifyContent: "center",
+    borderRadius: 16,
+    color: 'rgb(12, 148, 12)',
+    position: 'absolute', // Since top and left are used
   },
   screen2: {
     borderColor: Color.colorGray_100,
