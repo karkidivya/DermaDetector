@@ -25,9 +25,9 @@ def predict_route():
     print(text_info)  # Currently not used in prediction
 
     # Predict using the model
-    predicted_class = predict(image)
+    predicted_class, confidence = predict(image)
     print(predicted_class)
-    return jsonify({'predicted_class': predicted_class})
+    return jsonify({'predicted_class': predicted_class, 'confidence' : confidence })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

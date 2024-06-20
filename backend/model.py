@@ -1,6 +1,8 @@
 import torch
 from torchvision import transforms, models
 from PIL import Image
+import torch.nn.functional as F
+
 
 # Define the image transformations (should match those used during training)
 transform = transforms.Compose([
@@ -59,4 +61,15 @@ def predict(image, model=image_model, transform=transform, device=device):
     predicted_class = list_diseases[predicted.item()]
     print(predicted_class,"hhhhhhhhhhhhheeeeeelllooo")
 
-    return predicted_class
+     # Run the image through the model
+    with torch.no_grad():
+        output = model(image)
+        probabilities = F.softmax(output, dim=1)
+
+
+    # Get the predicted class index
+    confidence, predicted = torch.max(probabilities, 1)
+    predicted_class = list_diseases[predicted.item()]
+    confidence = confidence.item() * 100
+    
+    return predicted_class, confidence
