@@ -1,4 +1,4 @@
-# Skin Disease Detector using EfficientNet and tinyllma
+# Skin Disease Detector using EfficientNet and TinyLlama
 
 ## Project Summary and Motivation
 The aim of this project is to develop a comprehensive tool capable of predicting the likelihood of a skin lesion being a specific skin disease based on an image of the lesion. A skin lesion refers to an area of the skin that has a different texture or appearance compared to the surrounding skin. Skin diseases, ranging from benign conditions to serious ailments like skin cancer, can significantly impact an individual's health and quality of life. Early detection and accurate diagnosis are crucial for effective treatment and better health outcomes.
@@ -68,13 +68,16 @@ The initial model is based on EfficientNet, a state-of-the-art CNN architecture 
 Receiver operating characteristics (ROC) curves are graphs showing classifiers' performance by plotting the true positive rate and false positive rate. The area under the ROC curve (AUC) measures the performance of machine learning algorithms. ROC curves visually depict the statistical accuracy of classifier selection and this curve works by plotting the true positive rate (TPR) on the y-axis and the false positive rate (FPR) on the x-axis of a graph.
 The model is evaluated using many evaluation metrices such as accuracy, recall, precision, F1Score etc. 
 ![ROC_curve](https://github.com/karkidivya/Viveka-Hackathon/assets/83759652/418fa691-310b-4b39-9b6a-108c82938666)
-#Explanation about the above ROC Curve
+
+### Explanation about the above ROC Curve: 
 A ROC curve should be as close to the top-left corner of the graph as possible. This indicates that the model is good at distinguishing between positive and negative cases. A curve closer to the diagonal line indicates a model that performs no better than random guessing.
 In the image, all the ROC curves are close to the top-left corner, which suggests that the model performs well at classifying all the different skin lesions. 
 
-## Results Presentation
+### TinyLlama
+Incorporating TinyLLM for text description processing significantly enhanced the accuracy of our skin disease detection model. TinyLLM, a lightweight yet powerful language model, was employed to analyze and interpret textual descriptions provided by users about their skin conditions. This includes details such as the presence of itching, pain, changes in color, and other relevant symptoms. By processing these textual inputs alongside the image data, TinyLLM enabled our model to gain a more comprehensive understanding of the patient's condition. This multimodal approach allowed the model to leverage both visual and contextual information, leading to more accurate and reliable predictions
 
-The final tool predicts the likelihood that a skin lesion is one of several specified skin diseases. The results are presented to the user through mobile applications.
+## Results Presentation
+The final tool predicts the likelihood that a skin lesion is one of several specified skin diseases. These predictions are presented to the user through intuitive mobile applications platforms. In addition to the disease likelihood, the app also provides personalized recommendations about skin care and potential treatment plans based on the predicted condition. This comprehensive approach ensures that users not only receive a diagnosis but also actionable advice on how to manage their skin health effectively
 
 ### Mobile Applications
   #Mobile Application (React Native Expo)
