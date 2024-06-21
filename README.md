@@ -1,5 +1,6 @@
 # Skin Disease Detector using EfficientNet and TinyLlama
-
+### Demo Video link: 
+https://drive.google.com/drive/folders/1bI-NRwjaWxx095ifEAw1jtyvM571f_3M?usp=sharing
 ## Project Summary and Motivation
 The aim of this project is to develop a comprehensive tool capable of predicting the likelihood of a skin lesion being a specific skin disease based on an image of the lesion. A skin lesion refers to an area of the skin that has a different texture or appearance compared to the surrounding skin. Skin diseases, ranging from benign conditions to serious ailments like skin cancer, can significantly impact an individual's health and quality of life. Early detection and accurate diagnosis are crucial for effective treatment and better health outcomes.
 ### Key Facts About Skin Diseases
