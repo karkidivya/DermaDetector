@@ -10,6 +10,7 @@ from TextModel import TextModel
 app = Flask(__name__)
 CORS(app)
 
+
 # model and toknizer file path
 model_dir = 'models/text'
 tokenizer_dir = 'models/tokenizer'
@@ -17,9 +18,15 @@ tokenizer_dir = 'models/tokenizer'
 # instantiate text model class
 TEXT_MODEL = TextModel(model_dir, tokenizer_dir)
 
+
+# instantiate text model class
+TEXT_MODEL = TextModel(model_dir, tokenizer_dir)
+
+
 @app.route('/ping', methods=['GET'])
 def ping():
-    return jsonify({'message': 'pong'})
+   return jsonify({'message': 'pong'})
+
 
 @app.route('/predict', methods=['POST'])
 def predict_route():

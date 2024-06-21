@@ -53,9 +53,9 @@ const Screen3 = ({ route, navigation }) => {
           height={20}
           color={"#9EECD9"}
         />
-        <Text style={[styles.accuracy, styles.kmSpaceBlock]}>
+        {/* <Text style={[styles.accuracy, styles.kmSpaceBlock]}>
           Seriousness: 0.2%
-        </Text>
+        </Text> */}
       </View>
       <View style={[styles.row3, styles.row3FlexBox]}>
         <View style={styles.cleanseWithWarmWaterAndWiParent}>

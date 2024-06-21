@@ -5,6 +5,7 @@ from transformers import BitsAndBytesConfig
 # initial bitsandbytes config
 nf4_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_use_double_quant=True)
 
+
 # the text model class
 class TextModel():
     def __init__(self, model_dir, tokenizer_dir, device='cpu'):
