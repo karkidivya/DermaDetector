@@ -34,12 +34,17 @@ def predict_route():
     print(text_info)  # Currently not used in prediction
 
     # Predict using the model
-    # predicted_class, confidence = predict(image)
-    # print(predicted_class, "test", confidence)
+    disease_pred, confidence = predict(image)
     
-    predicted_class, confidence = 'acne', 92.21    
-    # predicted_class, confidence = 'nevus', 88.72
-    # predicted_class, confidence = 'eczema', 93.23
+    # generate recommendation
+    recommendation = TEXT_MODEL.generate_text(disease_pred, text_info)
+    print(recommendation)
+
+
+    recommendation = TEXT_MODEL.generate_text(disease_pred, text_info)
+
+    return jsonify({'predicted_class': disease_pred, 'confidence' : confidence, 'recommendation' : recommendation })
+
 
 # @app.route('/testPrediction', methods=['GET'])
 def test_prediction(probable_disease, description):
@@ -50,8 +55,6 @@ def test_prediction(probable_disease, description):
     print(output)
     pass
 
-    # recommendation = TEXT_MODEL.generate_text(predicted_class, text_info)
-    # return jsonify({'predicted_class': predicted_class, 'confidence' : confidence, 'recommendation' : recommendation })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

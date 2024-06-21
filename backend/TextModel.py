@@ -18,12 +18,12 @@ class TextModel():
                 "role": "system",
                 "content": """You are a medical chatbot who suggests treatment plan for skin disease. Give the output in this format:
 
-
                 Treatment Plan:
                 1) ... 
                 2) ...
                 ... ( Maximum 5 )
-
+                
+                Disclaimer: Consult with a dermatologist or skin care expert for more detailed recommendation.
 
                 If you are not sure then ask for more clarification of the symptopms.
                 The disease is most likely """ +  disease_pred + "."
@@ -39,9 +39,11 @@ class TextModel():
         prompt = self.tokenizer.apply_chat_template(message, tokenizer=True, add_generation_prompt=True, return_tensors="pt")
 
         output = self.model.generate(prompt, max_new_tokens=512, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
-
+        
         ret_val = self.tokenizer.decode(output[0], skip_special_tokens=True)
-
+        idx_asst = ret_val.find('<|assistant|>')
+        if idx_asst > 0:
+            ret_val = ret_val[idx_asst + len('<|assistant|>'):]
         return ret_val
 
 

@@ -66,10 +66,41 @@ def predict(image, model=image_model, transform=transform, device=device):
         probabilities = F.softmax(output, dim=1)
 
 
-    # Get the predicted class index
+    # out = {}
+    # print(probabilities.shape)
+    # for disease_name, confidence in zip(list_diseases, probabilities[0]):
+    #     out[disease_name] = round(confidence.item(), 4)
+    # return out
+
     confidence, predicted = torch.max(probabilities, 1)
     predicted_class = list_diseases[predicted.item()]
     confidence = confidence.item() * 100
     confidence = "{:.2f}".format(confidence)
     
     return predicted_class, confidence
+
+
+# text_info = "The symptoms that I have are scaly patches or lesions that are red on sun-exposed areas of the skin. Like the face, scalp, ears, neck, hands, and forearms"
+# test_image = Image.open('./test-data/image_46.jpg').convert('RGB')
+
+# out = predict(test_image)
+# print(out)
+
+
+# import and initialize text model
+# from TextModel import TextModel
+# # model and toknizer file path
+# model_dir = 'models/text'
+# tokenizer_dir = 'models/tokenizer'
+
+# # instantiate text model class
+# TEXT_MODEL = TextModel(model_dir, tokenizer_dir)
+
+
+# def img_txt_pipe():
+#     disease_pred, confidence = predict(test_image)
+#     recommendation = TEXT_MODEL.generate_text(disease_pred, text_info)
+#     print(recommendation)
+
+
+# img_txt_pipe()
