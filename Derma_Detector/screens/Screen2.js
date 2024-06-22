@@ -11,7 +11,7 @@ import { View, Button, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Menu, Provider } from "react-native-paper";
 import axios from 'axios';
-import { YOUR_IP_ADDRESS} from '@env';
+// import { YOUR_IP_ADDRESS} from '@env';
 const Screen2 = () => {
   const navigation = useNavigation();
 
@@ -82,7 +82,8 @@ const Screen2 = () => {
       // console.log(base64data, text)
       // Send the image and text to the backend
       try {
-        const res =  await axios.post(`http://${YOUR_IP_ADDRESS}:5000/predict`, {
+        // const res =  await axios.post(`http://${YOUR_IP_ADDRESS}:5000/predict`, {
+        const res =  await axios.post(`http://3244:5000/predict`, {
           image: base64data,
           text: text,
         });
